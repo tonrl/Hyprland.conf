@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 icon_base="/usr/share/icons/Papirus-Dark/32x32/"
 icon_pic="$icon_base/apps/lximage.svg" 

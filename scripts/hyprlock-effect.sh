@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 current_hour=$(date +"%H")
 user_string="<span color='#b10efb'>$USER</span>"

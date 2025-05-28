@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 icon_base="$HOME/.local/share/icons/ePapirus/32x32/"
 high_icon="$icon_base/panel/brightness-high-symbolic.svg"
 mid_icon="$icon_base/panel/brightness-symbolic.svg"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 icon_base="/usr/share/icons/Papirus-Dark/32x32/"
 icon_on="$icon_base/status/network-bluetooth-activated.svg"
