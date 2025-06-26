@@ -67,6 +67,7 @@ function brightness_up {
         fi
         send_notification "$(get_brightness)"
 }
+
 function brightness_down {
         local brightness=$(get_brightness)
 

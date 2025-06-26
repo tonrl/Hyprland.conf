@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function get_input {
-        [[ $(fcitx5-remote) -eq 2 ]] &&echo "  JP" || echo "  EN" 
+        [[ $(fcitx5-remote) -eq 2 ]] &&echo "󰧾 JP" || echo "󰧾 EN" 
 }
 
 function change_input {

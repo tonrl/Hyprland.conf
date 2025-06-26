@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 readonly icon_base="$HOME/.local/share/icons/ePapirus/32x32/"
+
 # volume output
 icon_volume_max="$icon_base/panel/audio-on.svg" 
 icon_volume_high="$icon_base/panel/audio-volume-high.svg" 
@@ -15,6 +16,16 @@ mic_on="$icon_base/panel/mic-on.svg"
 # Additional option
 swaync_op="-h string:x-canonical-private-synchronous:brightness_notif"
 expireTime=1000
+
+function usage {
+        echo "Usage: $0 {up|down|mute|mic} [step]"
+        exit 1
+}
+
+function check_dependencies {
+        command -v pactl >/dev/null 2>&1 || { echo "pactl required but not installed."; exit 1; }
+        command -v notify-send >/dev/null 2>&1 || { echo "notify-send required but not installed."; exit 1; }
+}
 
 function get_volume {
         # amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
@@ -45,8 +56,13 @@ function send_notification {
         local volume=$(get_volume)
         # Make the bar with the special character ─ (it's not dash -)
         if [ "$volume" -gt 0 ]; then
-                # bar=$(seq -s "─" $(("$volume" / 3)) | sed 's/[0-9]//g')"─"
-                bar=$(printf '─%.0s' $(seq 1 "$((volume / 3))"))
+                if [ "$volume" -ge 100 ]; then
+                        # bar=$(seq -s "─" $(("$volume" / 3)) | sed 's/[0-9]//g')"─"
+                        volume=100
+                        bar=$(printf '─%.0s' $(seq 1 "$((volume / 3))"))
+                else
+                        bar=$(printf '─%.0s' $(seq 1 "$((volume / 3))"))
+                fi
         else
                 bar=""
         fi
@@ -96,14 +112,15 @@ function volume_down_mute {
 
 function volume_up {
         local  volume=$(get_volume)
+        # echo "$volume"
         # Set the volume on (if it was muted)
         # amixer -D pulse set Master on > /dev/null
         pactl set-sink-mute @DEFAULT_SINK@ false > /dev/null
         # Up the volume (+ 5%)
-        if [ "$volume" -ge 100 ]; then
-                pactl set-sink-volume @DEFAULT_SINK@ 100% > /dev/null
-        else
+        if [ "$volume" -le 90 ]; then
                 pactl set-sink-volume @DEFAULT_SINK@ +5% > /dev/null
+        elif [ "$volume" -ge 95 ]; then
+                pactl set-sink-volume @DEFAULT_SINK@ 100% > /dev/null
         fi
         send_notification
 }
@@ -134,6 +151,7 @@ case $1 in
                         notify-send -a "System" -i "$mic_mute" -t $expireTime -r 2593 -u low $swaync_op "Mikrofon: Aus" "Your microphone is now turned off"
                 fi
                 ;;
-        *) echo "Usage: $0 {up|down|mute|mic}" ;;
+        *) usage 
+                ;;
 
 esac

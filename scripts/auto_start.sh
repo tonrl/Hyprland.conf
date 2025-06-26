@@ -31,7 +31,7 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # udiskie
-udiskie &
+udiskie -A -n&
 # Start Waybar
 # $HOME/.config/hypr/scripts/waybar-re.sh &
 startWall.sh &
@@ -43,7 +43,7 @@ aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
 xdg-settings set default-web-browser firefox.desktop &
 
 # KeePassXC
-(sleep 1 && keepassxc) &
+# (sleep 1 && keepassxc) &
 
 # Copyq
 # Uncomment the following line if you want to use Copyq

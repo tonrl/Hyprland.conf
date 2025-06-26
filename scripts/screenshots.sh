@@ -50,16 +50,16 @@ take_screenshot() {
                         return 1
                         ;;
 
-        esac
-        local status=$?
-        if [[ $status -eq 0 ]]; then 
-                send_notification pic "$filename"
-        else
-                send_notification error "Screenshot failed with code $status" 
-                return 1
-        fi
-        return 0
-}
+                esac
+                local status=$?
+                if [[ $status -eq 0 ]]; then 
+                        send_notification pic "$filename"
+                else
+                        send_notification error "Screenshot failed with code $status" 
+                        return 1
+                fi
+                return 0
+        }
 
 case "$1" in
         all|select)
