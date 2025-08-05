@@ -15,7 +15,7 @@ mic_on="$icon_base/panel/mic-on.svg"
 
 # Additional option
 swaync_op="-h string:x-canonical-private-synchronous:brightness_notif"
-expireTime=1000
+expireTime=2000
 
 function usage {
         echo "Usage: $0 {up|down|mute|mic} [step]"
@@ -70,10 +70,10 @@ function send_notification {
         if [ "$volume" -eq 0 ]; then
                 notify-send -a "System" -i "$icon_mute" -t $expireTime -r 2593 -u low ${swaync_op} "Lautstärke: ${volume}%" "Your Speakers are Disabled"
         else
-                if [ "$volume" -ge 85 ]; then
+                if [ "$volume" -ge 95 ]; then
                         icon_op=${icon_volume_max}
 
-                elif [ "$volume" -ge 50 ]; then
+                elif [ "$volume" -ge 75 ]; then
                         icon_op=${icon_volume_high}
 
                 elif [ "$volume" -ge 30 ]; then
@@ -119,6 +119,8 @@ function volume_up {
         # Up the volume (+ 5%)
         if [ "$volume" -le 90 ]; then
                 pactl set-sink-volume @DEFAULT_SINK@ +5% > /dev/null
+        elif [[ "$volume" -gt 90  &&  "$volume" -lt 95 ]]; then
+                pactl set-sink-volume @DEFAULT_SINK@ 95% > /dev/null
         elif [ "$volume" -ge 95 ]; then
                 pactl set-sink-volume @DEFAULT_SINK@ 100% > /dev/null
         fi
@@ -146,9 +148,9 @@ case $1 in
         mic)
                 pactl set-source-mute @DEFAULT_SOURCE@ toggle
                 if mic_on_off ; then 
-                        notify-send -a "System" -i "$mic_on" -t $expireTime -r 2593 -u low $swaync_op "Mikrofon: An" "Your microphone is now turned on"
+                        notify-send -a "System" -i "$mic_on" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: An" "Your microphone is now turned on"
                 else
-                        notify-send -a "System" -i "$mic_mute" -t $expireTime -r 2593 -u low $swaync_op "Mikrofon: Aus" "Your microphone is now turned off"
+                        notify-send -a "System" -i "$mic_mute" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: Aus" "Your microphone is now turned off"
                 fi
                 ;;
         *) usage 

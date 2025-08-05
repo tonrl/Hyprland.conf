@@ -5,7 +5,7 @@ high_icon="$icon_base/panel/brightness-high-symbolic.svg"
 mid_icon="$icon_base/panel/brightness-symbolic.svg"
 low_icon="$icon_base/panel/brightness-low-symbolic.svg" 
 off_icon="$icon_base/panel/gpm-brightness-lcd-disabled.svg"
-expireTime=1000
+expireTime=2000
 
 swaync_op="-h string:x-canonical-private-synchronous:brightness_notif"
 
@@ -28,8 +28,9 @@ function notification_fn {
 function send_notification {
 
         local brightness="$1"
+        local true_brightness="$(brightnessctl get)"
 
-        if [ "$brightness" -gt 0 ]; then
+        if [ "$true_brightness" -gt 324 ]; then
                 bar=$(printf '─%.0s' $(seq 1 "$((brightness / 3))"))
         else
                 bar=""
@@ -41,10 +42,10 @@ function send_notification {
                 if [ "$brightness" -ge 75 ]; then
                         icon_op=${high_icon}
 
-                elif [ "$brightness" -ge 50 ]; then
+                elif [ "$brightness" -ge 48 ]; then
                         icon_op=${mid_icon}
 
-                elif [ "$brightness" -ge 20 ]; then
+                elif [ "$brightness" -ge 14 ]; then
                         icon_op=${low_icon}
 
                 else
@@ -59,11 +60,9 @@ function brightness_up {
         local brightness=$(get_brightness)
 
         if [ "$brightness" -lt 1 ]; then
-                brightnessctl -qe s +1%
-        elif [ "$brightness" -lt 10 ]; then
-                brightnessctl -q s +1%
+                brightnessctl -q s 648
         else
-                brightnessctl -q s +5%
+                brightnessctl -q s +5% --exponent 2
         fi
         send_notification "$(get_brightness)"
 }
@@ -72,11 +71,30 @@ function brightness_down {
         local brightness=$(get_brightness)
 
         if [ "$brightness" -le 1 ]; then
-                brightnessctl -qe s 1%-
-        elif [ "$brightness" -le 10 ]; then
-                brightnessctl -q s 1%-
+                brightnessctl -q s 324
         else
-                brightnessctl -q s 5%-
+                brightnessctl -q s 5%- --exponent 2
+        fi
+        send_notification "$(get_brightness)"
+}
+
+function brightness_sup {
+        local brightness=$(get_brightness)
+        if [ "$brightness" -lt 1 ]; then
+                brightnessctl -q s 648
+        else
+                brightnessctl -q s +2%
+        fi
+        send_notification "$(get_brightness)"
+}
+
+function brightness_sdown {
+        local brightness=$(get_brightness)
+
+        if [ "$brightness" -le 1 ]; then
+                brightnessctl -q s 324
+        else
+                brightnessctl -q s 2%-
         fi
         send_notification "$(get_brightness)"
 }
@@ -88,6 +106,13 @@ case $1 in
         down)
                 brightness_down
                 ;;
+        scup)
+                brightness_sup
+                ;;
+        scdown)
+                brightness_sdown
+                ;;
+
         *)
                 echo "Usage: $0 {up|down}"
                 exit 1

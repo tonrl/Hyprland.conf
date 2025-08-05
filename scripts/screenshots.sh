@@ -8,13 +8,14 @@ expireTime=1500
 send_notification() {
         local type="$1"
         local message=""
-        local icon="$icon_pic"
+        # local icon="$icon_pic"
         local filename="$2"
 
         case "$type" in
 
                 pic)
                         message="Saved as: ${filename#$HOME/}"
+                        icon="$filename"
                         ;;
                 error)
                         message="$2"
@@ -26,7 +27,7 @@ send_notification() {
                         ;;
         esac
         notification_id=$(date +%s)
-        notify-send -a "System" -i "$icon" -r "$notification_id" -u low "Screenshot" "$message" -t $expireTime
+        notify-send -a "Screenshot" -i "$icon" -r "$notification_id" -u low "Screenshot" "$message" -t $expireTime
 }
 
 generate_filename() {
