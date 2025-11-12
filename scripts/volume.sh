@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 readonly icon_base="$HOME/.local/share/icons/ePapirus/32x32/"
 
@@ -147,6 +148,7 @@ case $1 in
                 ;;
         mic)
                 pactl set-source-mute @DEFAULT_SOURCE@ toggle
+                amixer set Capture 0% > /dev/null
                 if mic_on_off ; then 
                         notify-send -a "System" -i "$mic_on" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: An" "Your microphone is now turned on"
                 else

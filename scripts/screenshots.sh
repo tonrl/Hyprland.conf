@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 icon_base="/usr/share/icons/Papirus-Dark/32x32/"
 icon_pic="$icon_base/apps/lximage.svg" 
 icon_err="$icon_base/categories/system-error.svg" 
