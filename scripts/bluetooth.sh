@@ -31,5 +31,6 @@ if [ "$bluetooth_state" == "on" ]; then
 else
         bluetoothctl power on > /dev/null
         send_notification "on"
+        paplay ~/.local/share/sounds/win-sounds/'Windows XP Default.mp3' &
 fi
 

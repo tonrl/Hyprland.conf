@@ -128,12 +128,17 @@ function volume_up {
         send_notification
 }
 
+win_path="$HOME/.local/share/sounds/win-sounds/'Windows XP Ding.mp3'"
+
+
 case $1 in
         up)
-                volume_up
+                volume_up &
+                # paplay ~/.local/share/sounds/win-sounds/'Windows XP Ding.mp3' 
                 ;;
         down)
-                volume_down_mute
+                volume_down_mute &
+                # paplay ~/.local/share/sounds/win-sounds/'Windows XP Ding.mp3' 
                 ;;
         mute)
                 volume=$(get_volume)
@@ -144,6 +149,7 @@ case $1 in
                         notify-send -a "System" -i "$icon_mute" -t $expireTime -r 2593 -u low $swaync_op "Lautstärke: ${volume}%" "Your Speakers are Disabled"
                 else
                         unmute
+                        paplay ~/.local/share/sounds/win-sounds/'Windows XP Ding.mp3' &
                 fi
                 ;;
         mic)
@@ -151,6 +157,7 @@ case $1 in
                 amixer set Capture 0% > /dev/null
                 if mic_on_off ; then 
                         notify-send -a "System" -i "$mic_on" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: An" "Your microphone is now turned on"
+                        paplay ~/.local/share/sounds/win-sounds/'Windows XP Ding.mp3' &
                 else
                         notify-send -a "System" -i "$mic_mute" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: Aus" "Your microphone is now turned off"
                 fi

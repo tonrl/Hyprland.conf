@@ -30,6 +30,7 @@ send_notification() {
         esac
         notification_id=$(date +%s)
         notify-send -a "Screenshot" -i "$icon" -r "$notification_id" -u low "Screenshot" "$message" -t $expireTime
+        paplay ~/.local/share/sounds/win-sounds/'Windows XP Default.mp3' &
 }
 
 generate_filename() {
