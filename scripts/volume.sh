@@ -154,11 +154,12 @@ case $1 in
                 ;;
         mic)
                 pactl set-source-mute @DEFAULT_SOURCE@ toggle
-                amixer set Capture 0% > /dev/null
                 if mic_on_off ; then 
+                        amixer set Capture 20% > /dev/null
                         notify-send -a "System" -i "$mic_on" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: An" "Your microphone is now turned on"
                         paplay ~/.local/share/sounds/win-sounds/'Windows XP Ding.mp3' &
                 else
+                        amixer set Capture 0% > /dev/null
                         notify-send -a "System" -i "$mic_mute" -t $expireTime -r 279 -u low $swaync_op "Mikrofon: Aus" "Your microphone is now turned off"
                 fi
                 ;;
