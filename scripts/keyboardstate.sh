@@ -27,8 +27,7 @@ case $1 in
                 echo "get_input, change_input"
                 exit 1
                 ;;
+esac
 
-        esac
- 
 
 
