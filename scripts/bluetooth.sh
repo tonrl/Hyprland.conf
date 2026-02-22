@@ -9,7 +9,8 @@ expireTime=2500
 swaync_op="-h string:x-canonical-private-synchronous:brightness_notif"
 
 function get_bluetooth_status {
-        bluetoothctl show | grep PowerState | awk '{print $2}'
+        echo "show" | bluetoothctl | grep PowerState | awk '{print $2}'
+        # bluetoothctl show | grep PowerState | awk '{print $2}'
 }
 
 function send_notification {
