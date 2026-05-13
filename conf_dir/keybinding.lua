@@ -163,4 +163,4 @@ hl.bind("XF86PickupPhone", hl.dsp.exec_cmd("swaync-client -t"))
 hl.bind("XF86WLAN", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/wifi.sh"))
 
 -- grayscale --
-hl.bind("XF86Display", hl.dsp.exec_cmd("hyprshade toggle grayscale"))
+hl.bind("XF86Display", hl.dsp.exec_cmd("hyprshade toggle ~/.config/hypr/conf_dir/shader.d/grayscale.glsl"))
