@@ -121,10 +121,10 @@ hl.bind("ALT + R", hl.dsp.submap("resize"))
 hl.define_submap("resize", function()
 
         -- Set repeating binds for resizing the active window.
-        -- hl.bind("L", hl.resize({ x = 10, y = 0, relative = true}), { repeating = true })
-        -- hl.bind("H", hl.resize({ x = -10, y = 0, relative = true}), { repeating = true })
-        -- hl.bind("K", hl.resize({ x = 0, y = 10, relative = true}), { repeating = true })
-        -- hl.bind("J", hl.resize({ x = 10, y = -10, relative = true}), { repeating = true })
+        hl.bind("L", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
+        hl.bind("H", hl.dsp.window.resize({ x = -10, y = 0, relative = true}), { repeating = true })
+        hl.bind("K", hl.dsp.window.resize({ x = 0, y = 10, relative = true}), { repeating = true })
+        hl.bind("J", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
 
         -- Use `reset` to go back to the global submap
         hl.bind("escape", hl.dsp.submap("reset"))
@@ -134,6 +134,11 @@ end)
 ----------------------------------
 --      Special Workspaces      --
 ----------------------------------
+
+-- Full screen
+hl.bind(mainMod.. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind("ALT + D", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
 
 
 -------------------------------------

@@ -20,7 +20,7 @@ hl.bind(mainMod .. " +  SHIFT + B",hl.dsp.exec_cmd("uwsm app -t service -- firef
 hl.bind(mainMod .. " +  SHIFT + D",hl.dsp.exec_cmd("uwsm app -t service -- chromium.desktop"))
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+-- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 
 
