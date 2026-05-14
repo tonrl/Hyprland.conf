@@ -90,14 +90,12 @@ hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
 
 --  Move to + - workspace
--- hl.bind("+ CTRL + ALT + H", hl.dsp.focus({ workspace = -1}))
--- hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ workspace = m-1}))
--- hl.bind(" + CTRL + ALT + L", hl.dsp.focus({ workspace = "+1"}))
--- hl.bind(mainMod .. "( + CTRL + L", hl.dsp.focus({ workspace = m+1}))
+hl.bind(" + CTRL + ALT + H", hl.dsp.focus({ workspace = "e-1"}))
+hl.bind(" + CTRL + ALT + L", hl.dsp.focus({ workspace = "e+1"}))
 
 --Scroll through existing workspaces with mainMod + scroll
--- hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = e+1}))
--- hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = e-1}))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1"}))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1"}))
 ----------------------------------
 --      Special Workspaces      --
 ----------------------------------

@@ -47,14 +47,15 @@ hl.window_rule({
 hl.window_rule({
         name = "group_set_mail",
         group = "set",
+        workspace = "special:magic",
         match = {
-                tag = "mail"
+                tag = "email"
         }
 })
 
 hl.window_rule({
         name = "group_barred",
-        group = "barred",
+        -- group = "barred",
         match = {
                 tag = "noGroup"
         }
@@ -83,17 +84,9 @@ hl.window_rule({
         }
 })
 
-hl.window_rule({
-        workspace = "special:magic",
-        match = {
-                tag = "email"
-        }
-})
-
 ------------------------------
 -- Rule for floating window --
 ------------------------------
-
 
 -- Float
 hl.window_rule({

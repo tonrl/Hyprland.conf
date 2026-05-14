@@ -13,6 +13,7 @@ local ac_window = "rofi -show window"
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + O", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " +  SHIFT + F",hl.dsp.exec_cmd("uwsm app -t service -- firefox.desktop"))
