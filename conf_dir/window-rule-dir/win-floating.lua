@@ -17,22 +17,11 @@ hl.window_rule({
 hl.window_rule({
         name = "XDG_popup_config",
         match = {
-                tag = "FILE_OP",
+                -- tag = "FILE_OP",
+                class = "xdg-desktop-portal-gt"
         },
         group = "barred",
         tag = "+Float",
-        move = {462, 231},
-        size = {787, 600},
-        center = true,
-})
-
-hl.window_rule({
-        name = "XDG_popup_config",
-        match = {
-                -- tag = "WebBrowser",
-        },
-        group = "barred",
-        -- tag = "+Float",
         move = {462, 231},
         size = {787, 600},
         center = true,
@@ -105,8 +94,8 @@ hl.window_rule({
         pin = true,
         opaque = true,
 })
--- KeePassXC
 
+-- KeePassXC
 hl.window_rule({
         match = {
                 tag = "KEEPASSXC",
@@ -117,45 +106,36 @@ hl.window_rule({
         move = {601, 183},
 })
 
+-- Define KeePassXC
+local keepass_base = {
+        class = "org.keepassxc.KeePassXC"
+}
+
+-- Apply base rules
 hl.window_rule({
-        match = {
-                title = "passdef - KeePassXC",
-        },
-        tag = "+KEEPASSXC",
-
-
-})
-
-hl.window_rule({
-        match = {
-                title = ".*- KeePassXC",
-        },
-        tag = "+KEEPASSXC",
-})
-
-hl.window_rule({
-        match = {
-                title = "KeePassXC -  Access Request",
-        },
-        tag = "+POPUP",
-})
-
-hl.window_rule({
-        match = {
-                title = "KeePassXC - Browser Access Request",
-        },
-        tag = "+POPUP",
-})
-
-hl.window_rule({
-        match = {
-                class = "org.keepassxc.KeePassXC",
-        },
+        match = keepass_base,
         pin = true,
         opaque = true,
         group = "barred",
         animation = "slide",
 })
+
+-- Define title-based tag rules
+local keepass_title_rules = {
+        ["+KEEPASSXC"] = { "passdef - KeePassXC", ".*- KeePassXC" },
+        ["+POPUP"] = { "KeePassXC - Access Request", "KeePassXC - Browser Access Request" },
+}
+
+-- Iterate and apply
+for tag, titles in pairs(keepass_title_rules) do
+        for _, title_pattern in ipairs(titles) do
+                hl.window_rule({
+                        match = { title = title_pattern },
+                        tag = tag
+                })
+        end
+end
+
 
 -- Manage Cookies and Site Data popup
 hl.window_rule({
@@ -178,9 +158,6 @@ hl.window_rule({
         pin = true,
         group = "barred",
         tag = "+ft_mit_mid",
-
-
-
 })
 
 
@@ -204,10 +181,6 @@ hl.window_rule({
 
 
 })
-
--- windowrule = float on, match:title (firewall-applet)
--- windowrule = move 1600 57, match:title (firewall-applet)
--- windowrule = float on, match:title (About Firewall Applet)
 
 -- Gnome Calculator
 hl.window_rule({
