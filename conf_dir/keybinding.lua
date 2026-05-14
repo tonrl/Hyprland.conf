@@ -152,12 +152,12 @@ hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
 hl.bind("XF86Favorites", hl.dsp.exec_cmd("hyprctl reload"))
 
 -- Backlight Up down --
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("backlight.sh up"), {locked = true})
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("backlight.sh down"), {locked = true})
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("backlight.sh up"), {locked = true, repeating = true})
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("backlight.sh down"), {locked = true, repeating = true})
 
 -- Volume Up Down Mute --
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("volume.sh up && pkill -RTMIN+8 waybar"), {locked = true})
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("volume.sh down && pkill -RTMIN+8 waybar"), {locked = true})
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("volume.sh up && pkill -RTMIN+8 waybar"), {locked = true, repeating = true})
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("volume.sh down && pkill -RTMIN+8 waybar"), {locked = true, repeating = true})
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("volume.sh mute"), {locked = true})
 -- Mic --
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("volume.sh mic"), {locked = true})
