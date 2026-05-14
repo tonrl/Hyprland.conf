@@ -156,14 +156,14 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("backlight.sh up"), {locked = tru
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("backlight.sh down"), {locked = true})
 
 -- Volume Up Down Mute --
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("volume.sh up || pkill -RTMIN+8 waybar"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("volume.sh down || pkill -RTMIN+8 waybar"))
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("volume.sh mute"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("volume.sh up && pkill -RTMIN+8 waybar"), {locked = true})
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("volume.sh down && pkill -RTMIN+8 waybar"), {locked = true})
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("volume.sh mute"), {locked = true})
 -- Mic --
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("volume.sh mic"))
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("volume.sh mic"), {locked = true})
 
 -- Audioplay --
-hl.bind("XF86NotificationCenter", hl.dsp.exec_cmd("playerctl play-pause"))
+hl.bind("XF86NotificationCenter", hl.dsp.exec_cmd("playerctl play-pause"), {locked = true})
 hl.bind("XF86HangupPhone", hl.dsp.exec_cmd("bluetooth.sh"))
 hl.bind("XF86PickupPhone", hl.dsp.exec_cmd("swaync-client -t"))
 
