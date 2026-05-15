@@ -1,52 +1,45 @@
 -- General Settings for Window Rules
--- local terminal_classes = {
---         "foot",
---         "footclient",
---         "Alacritty",
---         "kitty"
--- }
--- for _, class_name in ipairs(terminal_classes) do
---         hl.window_rule({
---                 match = { class = class_name },
---                 tag = "+term"
---         })
--- end
 
--- cliant, Tag rule
-local cliant_rules = {
-        ["+term"] = { "foot", "footclient", "Alacritty", "kitty" },
-        ["+FILE_OP"] = { "xdg-desktop-portal-gt" },
-        ["+noGroup"] = { "firefox", "firefoxnightly", "chromium", "Firefox Beta", "gnucash" },
-        ["+email"] = { "org.mozilla.Thunderbird", "eu.betterbird.Betterbird" },
-        ["+finance"] = {"gnucash"},
-        ["+Opaque"] = {"gnucash"},
-        ["+Audio_ctl"] = {"com.saivert.pwvucontrol", "com.github.wwmm.easyeffects", "io.github.kaii_lb.Overskride"},
-        ["+NetWork"] = {"nm-connection-editor", "nm-applet"},
-        ["+Yubico"] = {"com.yubico.yubioath", "authenticator"},
+-- Rule definition
+local window_rules = {
+        -- Format: { type = "class" or "title", tag = "+TAG", targets = { "app1", "app2" } }
+        { type = "class", tag = "+term",     targets = { "foot", "footclient", "Alacritty", "kitty" } },
+        { type = "class", tag = "+FILE_OP",  targets = { "xdg-desktop-portal-gt" } },
+        { type = "class", tag = "+noGroup",  targets = { "firefox", "firefoxnightly", "chromium", "Firefox Beta", "gnucash" } },
+        { type = "class", tag = "+email",    targets = { "org.mozilla.Thunderbird", "eu.betterbird.Betterbird" } },
+        { type = "class", tag = "+finance",  targets = { "gnucash" } },
+        { type = "class", tag = "+Opaque",   targets = { "gnucash" } },
+        { type = "class", tag = "+Audio_ctl",targets = { "com.saivert.pwvucontrol", "com.github.wwmm.easyeffects", "io.github.kaii_lb.Overskride" } },
+        { type = "class", tag = "+NetWork",  targets = { "nm-connection-editor", "nm-applet" } },
+        { type = "class", tag = "+Yubico",   targets = { "com.yubico.yubioath", "authenticator" } },
+
+        -- Title-based rules
+        { type = "title", tag = "+KEEPASSXC",targets = { "passdef - KeePassXC", ".*- KeePassXC" } },
+        { type = "title", tag = "+POPUP",    targets = { "KeePassXC - Access Request", "KeePassXC - Browser Access Request" } },
+        { type = "title", tag = "+WebBrowser",    targets = { "Open.*", "Select File.*", "Save*", ".*Files.*", ".*Image.*", ".*Manager.*"} },
 }
 
-for tag, classes in pairs(cliant_rules) do
-        for _, class_name in ipairs(classes) do
+-- Rule
+for _, rule in ipairs(window_rules) do
+        for _, pattern in ipairs(rule.targets) do
+
+                local match_criteria = {}
+                if rule.type == "class" then
+                        match_criteria = { class = pattern }
+                elseif rule.type == "title" then
+                        match_criteria = { title = pattern }
+                end
+
                 hl.window_rule({
-                        match = { class = class_name },
-                        tag = tag
+                        match = match_criteria,
+                        tag = rule.tag
                 })
         end
 end
 
 
--- File Opener, Downloads Uploads etc
 
-hl.window_rule({ match = { title = "Open.*" }, tag = "+WebBrowser" })
-hl.window_rule({ match = { title = "Select File.*" }, tag = "+WebBrowser" })
-hl.window_rule({ match = { title = "Save*" }, tag = "+WebBrowser" })
-hl.window_rule({ match = { title = ".*Files.*" }, tag = "+WebBrowser" })
-hl.window_rule({ match = { title = ".*Image.*" }, tag = "+WebBrowser" })
-hl.window_rule({ match = { title = ".*Manager.*" }, tag = "+WebBrowser" })
-
-
-
--- Swaync
+-- SwayNC
 hl.layer_rule({
         match = { namespace = "swaync-control-center" },
         blur = true,

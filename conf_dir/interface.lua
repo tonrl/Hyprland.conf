@@ -62,10 +62,10 @@ hl.config({
             hl.animation({ leaf = "windowsOut", enabled = true, speed = 1, 1, bezier = "default", style = "popin 80%"}),
 
             hl.animation({ leaf = "border", enabled = true, speed = 1, 10, bezier = "default"}),
-            hl.animation({ leaf = "borderangle", enabled = true, speed = 5, bezier = "default", stype = "once"}),
+            hl.animation({ leaf = "borderangle", enabled = true, speed = 5, bezier = "default", style = "once"}),
 
             hl.animation({ leaf = "fade", enabled = true, speed = 1, 10, bezier = "default"}),
-            hl.animation({ leaf = "workspaces", enabled = true, speed = 1, 2, bezier = "default", stype = "slidefade 10%"}),
+            hl.animation({ leaf = "workspaces", enabled = true, speed = 1, 2, bezier = "default", style = "slidefade 10%"}),
             -- hl.animation({workspaces, 1, 4, myBezier}),
             hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 1, 3, bezier = "myBezier", style = "slidevert"}),
     },

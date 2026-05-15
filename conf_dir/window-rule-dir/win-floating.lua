@@ -120,23 +120,6 @@ hl.window_rule({
         animation = "slide",
 })
 
--- Define title-based tag rules
-local keepass_title_rules = {
-        ["+KEEPASSXC"] = { "passdef - KeePassXC", ".*- KeePassXC" },
-        ["+POPUP"] = { "KeePassXC - Access Request", "KeePassXC - Browser Access Request" },
-}
-
--- Iterate and apply
-for tag, titles in pairs(keepass_title_rules) do
-        for _, title_pattern in ipairs(titles) do
-                hl.window_rule({
-                        match = { title = title_pattern },
-                        tag = tag
-                })
-        end
-end
-
-
 -- Manage Cookies and Site Data popup
 hl.window_rule({
         match = {

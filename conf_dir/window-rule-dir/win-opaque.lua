@@ -1,31 +1,36 @@
 -- Opacity class based
-hl.window_rule({ match = { class = "mpv" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "vlc" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "org.gnome.Evince" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "thunderbird" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "virt-manager" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "firefox" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "chromium" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "Firefox Beta" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "firefoxnightly" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "io.freetubeapp.FreeTube" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "imv" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "org.gnome.Loupe" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "org.inkscape.Inkscape" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "org.gnome.Snapshot" }, tag = "+Opaque" })
-hl.window_rule({ match = { class = "giv.*" }, tag = "+Opaque" })
 
--- Opacity Title based
+local window_rules = {
+        -- Class-based Opacity Rules
+        {
+                type = "class",
+                tag = "+Opaque",
+                targets = {
+                        "mpv", "vlc", "org.gnome.Evince", "thunderbird", "virt-manager",
+                        "firefox", "Firefox Beta", "firefoxnightly", "chromium",
+                        "io.freetubeapp.FreeTube", "imv", "org.gnome.Loupe",
+                        "org.inkscape.Inkscape", "org.gnome.Snapshot", "giv.*"
+                }
+        },
 
-hl.window_rule({ match = { title = ".*Prime Video.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*Netflix.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*YouTube.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*Instagram.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*libreoffice.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*libreoffice.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*Hyprland.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*ArchWiki.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*DuckDuckGo.*" }, tag = "+Opaque" })
-hl.window_rule({ match = { title = ".*GitHub.*" }, tag = "+Opaque" })
+        -- Title-based Opacity Rules
+        {
+                type = "title",
+                tag = "+Opaque",
+                targets = {
+                        ".*Prime Video.*", ".*Netflix.*", ".*YouTube.*", ".*Instagram.*",
+                        ".*libreoffice.*", ".*Hyprland.*", ".*ArchWiki.*",
+                        ".*DuckDuckGo.*", ".*GitHub.*"
+                }
+        }
+}
 
-
+for _, rule in ipairs(window_rules) do
+        for _, pattern in ipairs(rule.targets) do
+                hl.window_rule({
+                        -- Dynamically uses either class = pattern or title = pattern
+                        match = { [rule.type] = pattern },
+                        tag = rule.tag
+                })
+        end
+end

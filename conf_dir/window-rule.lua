@@ -61,7 +61,7 @@ hl.window_rule({
         }
 })
 
--- No scren share
+-- No screen share
 hl.window_rule({
         no_screen_share = true,
         match = {
