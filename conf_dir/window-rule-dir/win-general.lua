@@ -9,9 +9,10 @@ local window_rules = {
         { type = "class", tag = "+email",    targets = { "org.mozilla.Thunderbird", "eu.betterbird.Betterbird" } },
         { type = "class", tag = "+finance",  targets = { "gnucash" } },
         { type = "class", tag = "+Opaque",   targets = { "gnucash" } },
-        { type = "class", tag = "+Audio_ctl",targets = { "com.saivert.pwvucontrol", "com.github.wwmm.easyeffects", "io.github.kaii_lb.Overskride" } },
+        { type = "class", tag = "+Audio_ctl",targets = { "com.saivert.pwvucontrol", "com.github.wwmm.easyeffects", "org.kde.easyeffects", "io.github.kaii_lb.Overskride" } },
         { type = "class", tag = "+NetWork",  targets = { "nm-connection-editor", "nm-applet" } },
         { type = "class", tag = "+Yubico",   targets = { "com.yubico.yubioath", "authenticator" } },
+        { type = "class", tag = "+Float",   targets = { "org.gnome.Snapshot"} },
 
         -- Title-based rules
         { type = "title", tag = "+KEEPASSXC",targets = { "passdef - KeePassXC", ".*- KeePassXC" } },

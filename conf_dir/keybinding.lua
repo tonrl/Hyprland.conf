@@ -12,7 +12,7 @@ hl.config({
                 follow_mouse = 1,
                 focus_on_close = 0,
 
-                sensitivity = 1.0, -- -1.0 - 1.0, 0 means no modification.
+                sensitivity = 0.6, -- -1.0 - 1.0, 0 means no modification.
                 accel_profile = "adaptive",
 
                 repeat_rate = 80,
@@ -22,6 +22,7 @@ hl.config({
                 touchpad = {
                         natural_scroll = false,
                         disable_while_typing = true,
+                        scroll_factor = 1.0,
                         drag_lock = 1,
                 },
         },
@@ -95,8 +96,8 @@ hl.bind(" + CTRL + ALT + L", hl.dsp.focus({ workspace = "e+1"}))
 
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
--- hl.bind("ALT + mouse:272", hl.dsp.window.drag(), { mouse = true })    -- ALT + LMB: Move a window by dragging more than 10px.
-hl.bind("ALT + mouse:272", hl.dsp.window.resize(), { mouse = true })  -- ALT + LMB: Floats a window by clicking
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })    -- ALT + LMB: Move a window by dragging more than 10px.
+-- hl.bind("ALT + mouse:272", hl.dsp.window.resize(), { mouse = true })  -- ALT + LMB: Floats a window by clicking
 
 --Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1"}))
@@ -171,4 +172,7 @@ hl.bind("XF86PickupPhone", hl.dsp.exec_cmd("swaync-client -t"))
 hl.bind("XF86WLAN", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/wifi.sh"))
 
 -- grayscale --
-hl.bind("XF86Display", hl.dsp.exec_cmd("hyprshade toggle ~/.config/hypr/conf_dir/shader.d/grayscale.glsl"))
+-- hl.bind("XF86Display", hl.dsp.exec_cmd("hyprshade toggle ~/.config/hypr/conf_dir/shader.d/grayscale.glsl"))
+hl.bind("XF86Display", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/screen_shader.sh on"))
+
+
