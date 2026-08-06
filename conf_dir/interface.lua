@@ -23,10 +23,12 @@ hl.config({
         allow_tearing = false,
 
         layout = "master",
+        -- layout = "scrolling",
     },
     decoration = {
             rounding       = 3,
             rounding_power = 10,
+            -- screen_shader = "~/.config/hypr/conf_dir/shader.d/grayscale.glsl",
 
             -- Change transparency of focused and unfocused windows
             active_opacity   = 0.9,
@@ -37,7 +39,7 @@ hl.config({
                     enabled      = false,
                     range        = 4,
                     render_power = 3,
-                    color        = 0xee1a1a1a,
+                    color        = "0xee1a1a1a",
             },
 
             blur = {
@@ -107,15 +109,17 @@ hl.config({
     --         preserve_split = true, -- You probably want this
     -- },
     master = {
-            new_on_active = "after",
             orientation = "right",
             special_scale_factor = 0.98,
-            allow_small_split = true,
             new_status = "inherit",
-            --  mfact = 0.505,
             mfact = 0.6,
-            new_on_top = false,
-            always_keep_position = false,
+            new_on_active = "",
+            new_on_top = true,
+            focus_master_on_close = true
+    },
+    scrolling = {
+            direction = "left",
+            follow_focus = true,
     },
     misc = {
             force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers

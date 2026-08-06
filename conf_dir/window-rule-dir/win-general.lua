@@ -16,7 +16,7 @@ local window_rules = {
 
         -- Title-based rules
         { type = "title", tag = "+KEEPASSXC",targets = { "passdef - KeePassXC", ".*- KeePassXC" } },
-        { type = "title", tag = "+POPUP",    targets = { "KeePassXC - Access Request", "KeePassXC - Browser Access Request" } },
+        { type = "title", tag = "+POPUP",    targets = { "KeePassXC - Access Request", "KeePassXC - Browser Access Request", "KeePassXC -  Access Request" } },
         { type = "title", tag = "+WebBrowser",    targets = { "Open.*", "Select File.*", "Save*", ".*Files.*", ".*Image.*", ".*Manager.*"} },
 }
 

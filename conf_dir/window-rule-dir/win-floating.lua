@@ -27,6 +27,18 @@ hl.window_rule({
         center = true,
 })
 
+hl.window_rule({
+        name = "Web Info config",
+        match = {
+                title = " Page Info.*"
+        },
+        group = "barred",
+        tag = "+NEW",
+        move = {462, 231},
+        size = {787, 600},
+        float = true,
+})
+
 
 hl.window_rule({
         name = "Def_rule_for_window",
@@ -198,6 +210,13 @@ hl.window_rule({
         move = {580, 209},
 })
 
+hl.window_rule({
+        match = {
+                class = "foot",
+
+        },
+        no_blur = false
+})
 
 
 
