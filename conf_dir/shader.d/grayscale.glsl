@@ -9,8 +9,8 @@ void main() {
         vec4 pixColor = texture(tex, v_texcoord);
         float new_colour = (pixColor.r+pixColor.g+pixColor.b)/3.0;
 
-        // pixColor[2] *= 0.1;
+        pixColor[2] *= 0.1;
 
-        // fragColor = pixColor;
+        fragColor = pixColor;
         fragColor =  vec4(new_colour,new_colour,new_colour,1.0);
 }
