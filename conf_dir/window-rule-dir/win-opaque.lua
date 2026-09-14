@@ -9,7 +9,7 @@ local window_rules = {
                         "mpv", "vlc", "org.gnome.Evince", "thunderbird", "virt-manager",
                         "firefox", "Firefox Beta", "firefoxnightly", "chromium",
                         "io.freetubeapp.FreeTube", "imv", "org.gnome.Loupe",
-                        "org.inkscape.Inkscape", "org.gnome.Snapshot", "giv.*"
+                        "org.inkscape.Inkscape", "org.gnome.Snapshot", "giv.*","foot"
                 }
         },
 

@@ -62,7 +62,7 @@ function brightness_up {
         local brightness=$(get_brightness)
 
         if [ "$brightness" -lt 1 ]; then
-                brightnessctl -q s 648
+                brightnessctl -q s 2%
         else
                 brightnessctl -q s +5% --exponent 2
         fi
